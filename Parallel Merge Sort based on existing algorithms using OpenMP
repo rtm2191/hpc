@@ -72,7 +72,7 @@ int main()
  {
  cin>>a[i];
  }
- mergesort(a,0,n-1)
+ mergesort(a,0,n-1);
  cout<<"\n sorted array is=>";
  for(i=0;i<n;i++)
  {
