@@ -1,3 +1,9 @@
+g++ -fopenempty npc.cpp -ohpc./hpc
+
+g++ filename.cpp -o final
+
+./final
+
 for ubentu:
 sudo apt install g++ libomp-dev build-essential
 #enter password if asked,same as login password
