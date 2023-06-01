@@ -1,0 +1,75 @@
+from tensorflow import keras
+from tensorflow.keras.datasets import imdb
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Dropout
+import numpy as np
+
+
+# Load the IMDB dataset
+(train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=10000)
+
+
+# Preprocess the data
+d0ef vectorize_sequences(sequences, dimension=10000):
+    results = np.zeros((len(sequences), dimension))
+    for i, sequence in enumerate(sequences):
+        results[i, sequence] = 1
+    return results
+
+
+x_train = vectorize_sequences(train_data)
+x_test = vectorize_sequences(test_data)
+
+
+y_train = np.asarray(train_labels).astype('float32')
+y_test = np.asarray(test_labels).astype('float32')
+
+
+# Build the model
+model = Sequential()
+model.add(Dense(16, activation='relu', input_shape=(10000,)))
+# model.add(Dropout(0.5))
+model.add(Dense(16, activation='relu'))
+# model.add(Dropout(0.5))
+model.add(Dense(1, activation='sigmoid'))
+
+
+# Compile the model
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+
+# Train the model
+history = model.fit(x_train, y_train, epochs=10, batch_size=512, validation_data=(x_test, y_test))
+
+
+# Evaluate the model
+results = model.evaluate(x_test, y_test)
+print("Test Loss:", results[0])
+print("Test Accuracy:", results[1])
+
+
+
+pred=model.predict(x_test)
+
+  pred[5]
+  
+  y_test[5]
+  
+  #consider threshold as 0.5
+for i in pred:
+    if(i[0]>0.5):
+        i[0]=1
+    else:
+        i[0] =0
+print(pred[:5])
+
+pred_s=[]
+
+
+#for positive negative
+for i in pred:
+    if(i[0]==1):
+        pred_s.append("Positive")
+    else:
+      pred_s.append("Negative")
+print(pred_s[:5])
